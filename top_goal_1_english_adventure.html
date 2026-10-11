@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top Goal 1 - English Quest Adventure 🌟</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  
+  <!-- Google Fonts: Fredoka & Varela Round for bubbly design -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            fredoka: ['Fredoka', 'sans-serif'],
+            outfit: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              pink: '#FF6B9B',
+              purple: '#8B5CF6',
+              yellow: '#FBBF24',
+              teal: '#14B8A6',
+              sky: '#38BDF8',
+              softBg: '#FFF5F8'
+            }
+          },
+          animation: {
+            'bounce-slow': 'bounce 2s infinite',
+            'wiggle': 'wiggle 0.5s ease-in-out infinite',
+            'pulse-subtle': 'pulseSubtle 2s infinite',
+            'float': 'float 3s ease-in-out infinite'
+          },
+          keyframes: {
+            wiggle: {
+              '0%, 100%': { transform: 'rotate(-3deg)' },
+              '50%': { transform: 'rotate(3deg)' },
+            },
+            pulseSubtle: {
+              '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+              '50%': { opacity: '0.9', transform: 'scale(1.03)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Fredoka', cursive, sans-serif;
+      background: linear-gradient(135deg, #fce7f3 0%, #e0e7ff 50%, #fef3c7 100%);
+      min-height: 100vh;
+      user-select: none;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border: 4px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15);
+    }
+
+    .btn-3d {
+      transition: all 0.15s ease;
+      box-shadow: 0 6px 0 rgba(0,0,0,0.15);
+    }
+    .btn-3d:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 rgba(0,0,0,0.15);
+    }
+
+    .btn-pink {
+      background: linear-gradient(180deg, #FF75A0 0%, #FF4D80 100%);
+      box-shadow: 0 6px 0 #D12E60;
+    }
+    .btn-pink:active {
+      box-shadow: 0 2px 0 #D12E60;
+    }
+
+    .btn-purple {
+      background: linear-gradient(180deg, #A78BFA 0%, #8B5CF6 100%);
+      box-shadow: 0 6px 0 #6D28D9;
+    }
+    .btn-purple:active {
+      box-shadow: 0 2px 0 #6D28D9;
+    }
+
+    .btn-yellow {
+      background: linear-gradient(180deg, #FCD34D 0%, #F59E0B 100%);
+      box-shadow: 0 6px 0 #D97706;
+      color: #78350F;
+    }
+    .btn-yellow:active {
+      box-shadow: 0 2px 0 #D97706;
+    }
+
+    .btn-teal {
+      background: linear-gradient(180deg, #2DD4BF 0%, #0D9488 100%);
+      box-shadow: 0 6px 0 #0F766E;
+    }
+    .btn-teal:active {
+      box-shadow: 0 2px 0 #0F766E;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c084fc;
+      border-radius: 10px;
+    }
+
+    /* Target badge pulse */
+    .badge-glow {
+      box-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #certificate-modal, #certificate-modal * {
+        visibility: visible;
+      }
+      #certificate-modal {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen text-slate-800 antialiased selection:bg-pink-300">
+
+  <!-- Top Navigation Header -->
+  <header class="w-full bg-white/80 backdrop-blur-md border-b-4 border-pink-300 sticky top-0 z-40 px-4 py-3 shadow-md">
+    <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Logo / Title -->
+      <div class="flex items-center gap-3 cursor-pointer" onclick="goToHome()">
+        <div class="w-11 h-11 bg-gradient-to-tr from-pink-400 to-purple-500 rounded-2xl flex items-center justify-center text-white text-2xl shadow-md animate-bounce-slow">
+          👑
+        </div>
+        <div>
+          <h1 class="text-xl md:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 tracking-wide">
+            TOP GOAL 1
+          </h1>
+          <p class="text-xs font-semibold text-purple-600">Grade 4 English • Welcome & Family Events</p>
+        </div>
+      </div>
+
+      <!-- Stats Bar (Lives, Score, Sound) -->
+      <div id="stats-bar" class="hidden flex items-center gap-3 sm:gap-6 bg-pink-50/90 px-4 py-2 rounded-2xl border-2 border-pink-200">
+        <!-- Hearts -->
+        <div class="flex items-center gap-1" title="Lives">
+          <span id="hearts-container" class="flex text-lg sm:text-xl text-rose-500">
+            <i class="fa-solid fa-heart animate-pulse"></i>
+            <i class="fa-solid fa-heart animate-pulse"></i>
+            <i class="fa-solid fa-heart animate-pulse"></i>
+          </span>
+        </div>
+
+        <!-- Score -->
+        <div class="flex items-center gap-1.5 font-bold text-amber-600 text-sm sm:text-base">
+          <i class="fa-solid fa-star text-amber-400 text-lg sm:text-xl"></i>
+          <span id="score-display">0</span>
+        </div>
+
+        <!-- Level Indicator -->
+        <div class="bg-purple-600 text-white font-bold text-xs sm:text-sm px-3 py-1 rounded-full shadow-sm">
+          <span id="level-indicator">Level 1</span>
+        </div>
+
+        <!-- Audio Toggle Button -->
+        <button id="sound-toggle-btn" onclick="toggleSound()" class="w-9 h-9 rounded-xl bg-white text-purple-600 shadow border-2 border-purple-200 flex items-center justify-center hover:bg-purple-100 transition" title="Toggle Audio FX">
+          <i id="sound-icon" class="fa-solid fa-volume-high"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-grow max-w-5xl w-full mx-auto p-4 flex flex-col justify-center items-center relative">
+
+    <!-- SCREEN 0: WELCOME & STUDENT NAME SCREEN -->
+    <div id="welcome-screen" class="w-full max-w-2xl glass-card rounded-3xl p-6 md:p-10 text-center my-auto animate-float">
+      
+      <!-- Mascot & Decorative Header -->
+      <div class="relative mb-6">
+        <div class="w-24 h-24 sm:w-28 sm:h-28 mx-auto bg-gradient-to-tr from-pink-300 via-purple-300 to-indigo-300 rounded-full flex items-center justify-center text-5xl shadow-inner border-4 border-white">
+          🦄
+        </div>
+        <span class="absolute top-0 right-1/4 text-2xl animate-bounce">✨</span>
+        <span class="absolute bottom-0 left-1/4 text-2xl animate-pulse">⭐</span>
+      </div>
+
+      <h2 class="text-2xl sm:text-4xl font-black text-purple-700 mb-2">
+        Welcome Super Star! 🌟
+      </h2>
+      <p class="text-sm sm:text-base text-slate-600 mb-6 font-medium">
+        Ready for the Top Goal 1 English Quest? Prepare for fun questions, matching cards, unscrambling puzzles, and spelling bees!
+      </p>
+
+      <!-- Input Form -->
+      <div class="max-w-md mx-auto space-y-4 mb-8">
+        <div>
+          <label for="student-name-input" class="block text-left text-sm font-bold text-purple-800 mb-1">
+            <i class="fa-solid fa-user-astronaut text-pink-500 mr-1"></i> Enter Your Name (اسم الطالبة):
+          </label>
+          <input type="text" id="student-name-input" placeholder="e.g. Sara / سارة" class="w-full px-5 py-3.5 rounded-2xl border-4 border-pink-200 focus:border-purple-500 focus:outline-none text-lg font-bold text-center text-purple-900 shadow-inner bg-white/90 transition" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 text-xs sm:text-sm font-bold text-slate-600 text-left bg-purple-50 p-3.5 rounded-2xl border border-purple-100">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-book-open text-purple-500 text-base"></i> Unit: Welcome & Family
+          </div>
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-award text-amber-500 text-base"></i> Teacher: T. Jawaher
+          </div>
+        </div>
+      </div>
+
+      <!-- Start Button -->
+      <button onclick="startGame()" class="btn-3d btn-pink text-white text-xl font-black px-10 py-4 rounded-2xl w-full sm:w-auto tracking-wider uppercase flex items-center justify-center gap-3 mx-auto group">
+        <span>Start Adventure</span>
+        <i class="fa-solid fa-circle-play text-2xl group-hover:translate-x-1 transition-transform"></i>
+      </button>
+
+    </div>
+
+
+    <!-- SCREEN 1: LEVEL MAP / DASHBOARD -->
+    <div id="level-dashboard" class="hidden w-full max-w-4xl space-y-6">
+      
+      <!-- Greeting Banner -->
+      <div class="glass-card rounded-3xl p-6 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-4 border-l-8 border-l-pink-500">
+        <div class="space-y-1">
+          <span class="bg-pink-100 text-pink-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Top Goal 1 Student</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-purple-900">
+            Hello, <span id="display-student-name" class="text-pink-600">Super Star</span>! 👋
+          </h2>
+          <p class="text-sm text-slate-600 font-medium">Choose a level below to earn stars and win your certificate!</p>
+        </div>
+        <div class="flex items-center gap-2 bg-amber-100 border-2 border-amber-300 px-4 py-2 rounded-2xl">
+          <i class="fa-solid fa-trophy text-amber-500 text-3xl"></i>
+          <div class="text-left">
+            <div class="text-xs font-bold text-amber-800">Total Stars</div>
+            <div id="dash-total-stars" class="text-xl font-black text-amber-600">0 / 40</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Levels Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+        <!-- Level 1 Card -->
+        <div onclick="selectLevel(1)" class="glass-card rounded-3xl p-5 border-2 border-pink-300 hover:border-pink-500 transition-all cursor-pointer group hover:-translate-y-1 relative overflow-hidden">
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-pink-400 to-rose-400 flex items-center justify-center text-3xl text-white shadow-md group-hover:scale-110 transition-transform">
+              ❓
+            </div>
+            <div class="flex-grow">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-pink-600 bg-pink-100 px-2.5 py-0.5 rounded-full">Level 1</span>
+                <span id="lvl1-stars" class="text-amber-500 font-bold text-sm"><i class="fa-solid fa-star"></i> 0/10</span>
+              </div>
+              <h3 class="text-lg font-black text-purple-900 mt-1">Quiz Quest</h3>
+              <p class="text-xs text-slate-500 font-medium">General Questions, Grammar & Pronouns</p>
+            </div>
+            <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-pink-500 group-hover:translate-x-1 transition"></i>
+          </div>
+        </div>
+
+        <!-- Level 2 Card -->
+        <div onclick="selectLevel(2)" class="glass-card rounded-3xl p-5 border-2 border-purple-300 hover:border-purple-500 transition-all cursor-pointer group hover:-translate-y-1 relative overflow-hidden">
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-400 to-indigo-500 flex items-center justify-center text-3xl text-white shadow-md group-hover:scale-110 transition-transform">
+              🖼️
+            </div>
+            <div class="flex-grow">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-purple-600 bg-purple-100 px-2.5 py-0.5 rounded-full">Level 2</span>
+                <span id="lvl2-stars" class="text-amber-500 font-bold text-sm"><i class="fa-solid fa-star"></i> 0/10</span>
+              </div>
+              <h3 class="text-lg font-black text-purple-900 mt-1">Picture & Sentence Match</h3>
+              <p class="text-xs text-slate-500 font-medium">Match short reading sentences to photos</p>
+            </div>
+            <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-purple-500 group-hover:translate-x-1 transition"></i>
+          </div>
+        </div>
+
+        <!-- Level 3 Card -->
+        <div onclick="selectLevel(3)" class="glass-card rounded-3xl p-5 border-2 border-amber-300 hover:border-amber-500 transition-all cursor-pointer group hover:-translate-y-1 relative overflow-hidden">
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-400 to-yellow-500 flex items-center justify-center text-3xl text-white shadow-md group-hover:scale-110 transition-transform">
+              🧩
+            </div>
+            <div class="flex-grow">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-amber-700 bg-amber-100 px-2.5 py-0.5 rounded-full">Level 3</span>
+                <span id="lvl3-stars" class="text-amber-500 font-bold text-sm"><i class="fa-solid fa-star"></i> 0/10</span>
+              </div>
+              <h3 class="text-lg font-black text-purple-900 mt-1">Word & Sentence Unscramble</h3>
+              <p class="text-xs text-slate-500 font-medium">Formal/Informal, Adjectives & Sentences</p>
+            </div>
+            <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-amber-500 group-hover:translate-x-1 transition"></i>
+          </div>
+        </div>
+
+        <!-- Level 4 Card -->
+        <div onclick="selectLevel(4)" class="glass-card rounded-3xl p-5 border-2 border-teal-300 hover:border-teal-500 transition-all cursor-pointer group hover:-translate-y-1 relative overflow-hidden">
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-teal-400 to-emerald-500 flex items-center justify-center text-3xl text-white shadow-md group-hover:scale-110 transition-transform">
+              🐝
+            </div>
+            <div class="flex-grow">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-teal-700 bg-teal-100 px-2.5 py-0.5 rounded-full">Level 4</span>
+                <span id="lvl4-stars" class="text-amber-500 font-bold text-sm"><i class="fa-solid fa-star"></i> 0/10</span>
+              </div>
+              <h3 class="text-lg font-black text-purple-900 mt-1">Spelling Bees</h3>
+              <p class="text-xs text-slate-500 font-medium">Fill in missing letters (Camera, Celebration, etc.)</p>
+            </div>
+            <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-teal-500 group-hover:translate-x-1 transition"></i>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Footer -->
+      <div class="flex justify-center pt-2">
+        <button onclick="showCertificateModal()" class="btn-3d btn-yellow text-slate-900 font-black px-8 py-3.5 rounded-2xl flex items-center gap-3">
+          <i class="fa-solid fa-award text-2xl text-amber-700"></i>
+          <span>View Achievement Certificate</span>
+        </button>
+      </div>
+
+    </div>
+
+
+    <!-- SCREEN 2: GAMEPLAY ARENA CONTAINER -->
+    <div id="game-arena" class="hidden w-full max-w-3xl glass-card rounded-3xl p-5 sm:p-8 relative">
+      
+      <!-- Gameplay Header Info -->
+      <div class="flex items-center justify-between border-b-2 border-purple-100 pb-4 mb-6">
+        
+        <!-- Back Button -->
+        <button onclick="goToHome()" class="text-slate-500 hover:text-purple-600 font-bold text-sm flex items-center gap-2 bg-slate-100 px-3 py-1.5 rounded-xl transition">
+          <i class="fa-solid fa-arrow-left"></i> Menu
+        </button>
+
+        <!-- Question Counter & Progress Bar -->
+        <div class="flex-grow max-w-xs mx-4">
+          <div class="flex justify-between text-xs font-bold text-purple-700 mb-1">
+            <span id="question-count-text">Question 1/5</span>
+            <span id="progress-percent-text">20%</span>
+          </div>
+          <div class="w-full h-3 bg-purple-100 rounded-full overflow-hidden">
+            <div id="progress-bar-fill" class="h-full bg-gradient-to-r from-pink-500 to-purple-600 rounded-full transition-all duration-300" style="width: 20%"></div>
+          </div>
+        </div>
+
+        <!-- Speak Audio Button for Current Prompt -->
+        <button id="tts-prompt-btn" onclick="speakCurrentPrompt()" class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 hover:bg-purple-200 flex items-center justify-center transition" title="Listen to question">
+          <i class="fa-solid fa-volume-high text-lg"></i>
+        </button>
+      </div>
+
+      <!-- GAME VIEWPORT (Content Dynamically Injected) -->
+      <div id="game-viewport" class="min-h-[300px] flex flex-col justify-center">
+        <!-- Dynamic content injected here by JavaScript -->
+      </div>
+
+      <!-- Feedback Modal Banner overlay within card -->
+      <div id="feedback-banner" class="hidden absolute inset-0 bg-white/95 backdrop-blur-md rounded-3xl p-6 flex flex-col items-center justify-center text-center z-30 animate-fade-in">
+        <div id="feedback-icon" class="text-6xl mb-3">🎉</div>
+        <h3 id="feedback-title" class="text-2xl font-black text-purple-900 mb-2">Great Job!</h3>
+        <p id="feedback-subtitle" class="text-base text-slate-600 mb-6 font-medium">You selected the correct answer!</p>
+        <button id="feedback-next-btn" onclick="nextQuestion()" class="btn-3d btn-pink text-white font-black px-8 py-3 rounded-2xl flex items-center gap-2">
+          <span>Next Challenge</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- MODAL: CERTIFICATE OF ACHIEVEMENT -->
+  <div id="certificate-modal" class="hidden fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-10 border-8 border-amber-300 shadow-2xl relative my-auto">
+      
+      <!-- Close Button -->
+      <button onclick="closeCertificateModal()" class="no-print absolute top-4 right-4 w-10 h-10 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full flex items-center justify-center font-bold">
+        <i class="fa-solid fa-xmark text-xl"></i>
+      </button>
+
+      <!-- Printable Certificate Content -->
+      <div class="text-center border-4 border-dashed border-amber-200 p-6 sm:p-8 rounded-2xl bg-amber-50/50">
+        
+        <div class="text-4xl sm:text-5xl mb-2">👑 🎓 🌟</div>
+        
+        <h3 class="text-xs font-black uppercase tracking-widest text-amber-700">Top Goal 1 • Grade 4 Primary School</h3>
+        <h2 class="text-2xl sm:text-4xl font-black text-purple-900 my-2">CERTIFICATE OF ACHIEVEMENT</h2>
+        <p class="text-xs sm:text-sm font-semibold text-slate-500">شهادة تفوق وإنجاز في اللغة الإنجليزية</p>
+
+        <div class="my-6">
+          <p class="text-xs sm:text-sm text-slate-600 font-bold uppercase tracking-wider">This Certificate is proudly awarded to:</p>
+          <div id="cert-student-name" class="text-2xl sm:text-4xl font-black text-pink-600 underline decoration-wavy decoration-amber-400 mt-2">
+            Sara
+          </div>
+        </div>
+
+        <p class="text-xs sm:text-base text-slate-700 font-medium max-w-lg mx-auto mb-6">
+          For outstanding performance and mastery of English in <br class="hidden sm:inline"/>
+          <strong class="text-purple-800">Welcome Unit & Family Events Unit</strong> (Top Goal 1).
+        </p>
+
+        <!-- Stats grid inside certificate -->
+        <div class="grid grid-cols-2 gap-4 max-w-md mx-auto bg-white p-3.5 rounded-xl border border-amber-200 mb-6">
+          <div>
+            <div class="text-xs text-slate-500 font-bold">Total Stars</div>
+            <div id="cert-stars" class="text-xl font-black text-amber-500"><i class="fa-solid fa-star"></i> 0</div>
+          </div>
+          <div>
+            <div class="text-xs text-slate-500 font-bold">Teacher Grade</div>
+            <div class="text-xl font-black text-emerald-600">A+ Super Star</div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between text-xs font-bold text-slate-500 pt-4 border-t border-amber-200">
+          <div>Teacher: <span class="text-purple-700">T. Jawaher Alqarni</span></div>
+          <div>School: <span class="text-purple-700">Madrasati Top Goal 1</span></div>
+        </div>
+
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="no-print flex flex-wrap gap-3 justify-center mt-6">
+        <button onclick="window.print()" class="btn-3d btn-purple text-white text-sm font-bold px-6 py-3 rounded-xl flex items-center gap-2">
+          <i class="fa-solid fa-print"></i> Print / Save PDF
+        </button>
+        <button onclick="closeCertificateModal()" class="btn-3d btn-pink text-white text-sm font-bold px-6 py-3 rounded-xl">
+          Back to Adventure
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <script>
+    /* ====================================================================
+       GAME DATA STRUCTURE (Top Goal 1: Welcome & Family Events)
+       ==================================================================== */
+    
+    // Level 1: Quiz Quest (General Questions & Grammar)
+    const level1Data = [
+      {
+        type: 'mcq',
+        question: "What school subject is more difficult at school?",
+        options: ["I think math.", "I am surprised.", "I am happy.", "It's bag."],
+        answer: 0,
+        hint: "Think about school subjects like Math or English!"
+      },
+      {
+        type: 'mcq',
+        question: "Who is naughty in your family?",
+        options: ["My friend.", "My little brother.", "My book.", "My bag."],
+        answer: 1,
+        hint: "A family member who likes to make trouble!"
+      },
+      {
+        type: 'mcq',
+        question: "Who is the tallest student in your class?",
+        options: ["I have a book.", "My cat.", "My teacher.", "My bus."],
+        answer: 2,
+        hint: "Someone who teaches you!"
+      },
+      {
+        type: 'mcq',
+        question: "How often do you visit your grandparents?",
+        options: ["I always visit them.", "I love my grandpa.", "I go by car.", "I go by plane."],
+        answer: 0,
+        hint: "How often = frequency word (always)!"
+      },
+      {
+        type: 'mcq',
+        question: "What is your favorite place to visit?",
+        options: ["I'm happy.", "Diriyah is my favorite place.", "I usually visit my uncle.", "It is good."],
+        answer: 1,
+        hint: "A famous historic place in Saudi Arabia!"
+      },
+      {
+        type: 'mcq',
+        question: "How many museums are they building in Diriyah?",
+        options: ["Three.", "Two.", "Five.", "Nine."],
+        answer: 0,
+        hint: "Number: 3"
+      },
+      {
+        type: 'mcq',
+        question: "We ____ happy.",
+        options: ["is", "was", "were", "of"],
+        answer: 2,
+        hint: "We + past tense plural = were"
+      },
+      {
+        type: 'mcq',
+        question: "It ____ the best day of school.",
+        options: ["were", "are", "was", "and"],
+        answer: 2,
+        hint: "It + past tense singular = was"
+      },
+      {
+        type: 'mcq',
+        question: "How often ____ you see your cousin?",
+        options: ["does", "do", "is", "on"],
+        answer: 1,
+        hint: "You takes 'do'!"
+      },
+      {
+        type: 'mcq',
+        question: "How often does ____ have a cold?",
+        options: ["she", "you", "they", "we"],
+        answer: 0,
+        hint: "Does is used with He/She/It!"
+      },
+      {
+        type: 'mcq',
+        question: "Whose dress was it? (she)",
+        options: ["It was theirs.", "It was ours.", "It was hers.", "It was mine."],
+        answer: 2,
+        hint: "She -> hers"
+      },
+      {
+        type: 'mcq',
+        question: "Is this your bag? No, it isn't ____",
+        options: ["yours", "his", "mine", "ours"],
+        answer: 2,
+        hint: "My bag -> mine"
+      },
+      {
+        type: 'mcq',
+        question: "Whose car was it? (we) It wasn't ____",
+        options: ["theirs", "ours", "hers", "mine"],
+        answer: 1,
+        hint: "We -> ours"
+      }
+    ];
+
+    // Level 2: Sentence & Visual Matching
+    const level2Data = [
+      {
+        sentence: "She is afraid.",
+        emoji: "😱",
+        description: "Girl feeling scared or afraid",
+        options: ["😱 She is afraid.", "😊 She is happy.", "😴 She is sleeping.", "🍕 She is eating pizza."]
+      },
+      {
+        sentence: "They are playing a game.",
+        emoji: "🎮",
+        description: "Friends having fun playing games",
+        options: ["🦈 A shark in the water", "🎮 They are playing a game.", "🚗 Driving a car", "📚 Reading a book"]
+      },
+      {
+        sentence: "A shark in the water",
+        emoji: "🦈",
+        description: "Dangerous shark swimming in ocean",
+        options: ["🐱 A cat on the bed", "⛵ Fishing in a boat", "🦈 A shark in the water", "🏃 Walking in the park"]
+      },
+      {
+        sentence: "I always walk in the park.",
+        emoji: "🌳",
+        description: "Walking outdoors in park green nature",
+        options: ["🌳 I always walk in the park.", "⚽ Playing soccer", "🥁 Playing the drum", "✈️ Flying an airplane"]
+      },
+      {
+        sentence: "He is fishing in a boat.",
+        emoji: "🎣",
+        description: "Boy catching fish in a boat",
+        options: ["📸 Taking a picture", "🎣 He is fishing in a boat.", "🎸 Playing guitar", "🎒 School bag"]
+      }
+    ];
+
+    // Level 3: Sentence Unscramble & Word Pair Matching
+    const level3Data = [
+      {
+        type: 'unscramble',
+        title: "Unscramble the sentence!",
+        words: ["It", "is", "a", "terrible", "game."],
+        correctSentence: "It is a terrible game."
+      },
+      {
+        type: 'informal',
+        title: "Choose the formal word for 'daddy':",
+        prompt: "daddy -> ____",
+        options: ["dad", "mom", "grandma", "aunt"],
+        answer: 0
+      },
+      {
+        type: 'informal',
+        title: "Choose the formal word for 'granny':",
+        prompt: "granny -> ____",
+        options: ["mom", "grandma", "aunt", "sister"],
+        answer: 1
+      },
+      {
+        type: 'trait',
+        title: "Lucy likes to talk a lot. She is ____",
+        options: ["weak", "chatty", "helpful", "lazy"],
+        answer: 1
+      },
+      {
+        type: 'trait',
+        title: "My aunt is not strong. She is ____",
+        options: ["helpful", "weak", "chatty", "strong"],
+        answer: 1
+      },
+      {
+        type: 'trait',
+        title: "My sister loves to help. She is ____",
+        options: ["lazy", "naughty", "helpful", "weak"],
+        answer: 2
+      }
+    ];
+
+    // Level 4: Spelling Bee (Missing Letters)
+    const level4Data = [
+      {
+        wordWithBlank: "Ca _ era",
+        missingLetter: "m",
+        fullWord: "Camera",
+        hint: "Used to take photos 📸",
+        options: ["m", "n", "b", "d"]
+      },
+      {
+        wordWithBlank: "Cele _ ration",
+        missingLetter: "b",
+        fullWord: "Celebration",
+        hint: "Party or happy event 🎉",
+        options: ["b", "d", "p", "g"]
+      },
+      {
+        wordWithBlank: "Ball _ _ ns",
+        missingLetter: "oo",
+        fullWord: "Balloons",
+        hint: "Colorful party air toys 🎈",
+        options: ["oo", "ee", "aa", "ou"]
+      },
+      {
+        wordWithBlank: "Play _ round",
+        missingLetter: "g",
+        fullWord: "Playground",
+        hint: "Where children play at school 🛝",
+        options: ["g", "s", "k", "j"]
+      },
+      {
+        wordWithBlank: "Kitte _",
+        missingLetter: "n",
+        fullWord: "Kitten",
+        hint: "Cute baby cat 🐱",
+        options: ["n", "m", "t", "r"]
+      },
+      {
+        wordWithBlank: "Ch _ tty",
+        missingLetter: "a",
+        fullWord: "Chatty",
+        hint: "Talks a lot 🗣️",
+        options: ["a", "e", "i", "o"]
+      },
+      {
+        wordWithBlank: "Grand _ a",
+        missingLetter: "m",
+        fullWord: "Grandma",
+        hint: "Your mother's mother 👵",
+        options: ["m", "n", "p", "d"]
+      }
+    ];
+
+
+    /* ====================================================================
+       STATE VARIABLES & SOUND ENGINE
+       ==================================================================== */
+    let studentName = "Sara";
+    let score = 0;
+    let lives = 3;
+    let currentLevel = 1;
+    let currentQuestionIndex = 0;
+    let currentLevelQuestions = [];
+    let soundEnabled = true;
+    let levelStars = { 1: 0, 2: 0, 3: 0, 4: 0 };
+
+    // Web Audio API Synthesizer for SFX
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+
+    function initAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new AudioCtx();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playSoundEffect(type) {
+      if (!soundEnabled) return;
+      initAudioContext();
+      if (!audioCtx) return;
+
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      const now = audioCtx.currentTime;
+
+      if (type === 'correct') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(523.25, now); // C5
+        osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.1); // E5
+        osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.2); // G5
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+        osc.start(now);
+        osc.stop(now + 0.35);
+      } else if (type === 'wrong') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(220, now); // A3
+        osc.frequency.exponentialRampToValueAtTime(146.83, now + 0.25); // D3
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+        osc.start(now);
+        osc.stop(now + 0.3);
+      } else if (type === 'star') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, now); // D5
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.15); // A5
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      }
+    }
+
+    // Text-To-Speech function
+    function speakText(text) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel(); // stop previous speech
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.9;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const icon = document.getElementById('sound-icon');
+      if (soundEnabled) {
+        icon.className = 'fa-solid fa-volume-high';
+      } else {
+        icon.className = 'fa-solid fa-volume-xmark text-rose-500';
+      }
+    }
+
+
+    /* ====================================================================
+       NAVIGATION & FLOW
+       ==================================================================== */
+    
+    function startGame() {
+      const input = document.getElementById('student-name-input');
+      if (input.value.trim() !== '') {
+        studentName = input.value.trim();
+      }
+      document.getElementById('display-student-name').textContent = studentName;
+      document.getElementById('welcome-screen').classList.add('hidden');
+      document.getElementById('level-dashboard').classList.remove('hidden');
+      document.getElementById('stats-bar').classList.remove('hidden');
+      updateStatsUI();
+      initAudioContext();
+    }
+
+    function goToHome() {
+      document.getElementById('welcome-screen').classList.add('hidden');
+      document.getElementById('game-arena').classList.add('hidden');
+      document.getElementById('level-dashboard').classList.remove('hidden');
+      document.getElementById('stats-bar').classList.remove('hidden');
+      document.getElementById('feedback-banner').classList.add('hidden');
+      updateStatsUI();
+    }
+
+    function selectLevel(lvlNum) {
+      currentLevel = lvlNum;
+      currentQuestionIndex = 0;
+      lives = 3;
+      
+      // Load questions for selected level
+      if (lvlNum === 1) currentLevelQuestions = [...level1Data].sort(() => 0.5 - Math.random()).slice(0, 5);
+      else if (lvlNum === 2) currentLevelQuestions = [...level2Data].sort(() => 0.5 - Math.random()).slice(0, 5);
+      else if (lvlNum === 3) currentLevelQuestions = [...level3Data].sort(() => 0.5 - Math.random()).slice(0, 5);
+      else if (lvlNum === 4) currentLevelQuestions = [...level4Data].sort(() => 0.5 - Math.random()).slice(0, 5);
+
+      document.getElementById('level-indicator').textContent = `Level ${lvlNum}`;
+      document.getElementById('level-dashboard').classList.add('hidden');
+      document.getElementById('game-arena').classList.remove('hidden');
+
+      renderCurrentQuestion();
+      updateStatsUI();
+    }
+
+    function updateStatsUI() {
+      document.getElementById('score-display').textContent = score;
+      
+      // Hearts
+      let heartsHtml = '';
+      for (let i = 0; i < 3; i++) {
+        if (i < lives) {
+          heartsHtml += `<i class="fa-solid fa-heart animate-pulse mr-1"></i>`;
+        } else {
+          heartsHtml += `<i class="fa-regular fa-heart text-slate-300 mr-1"></i>`;
+        }
+      }
+      document.getElementById('hearts-container').innerHTML = heartsHtml;
+
+      // Dashboard stars summary
+      const totalStars = Object.values(levelStars).reduce((a, b) => a + b, 0);
+      document.getElementById('dash-total-stars').textContent = `${totalStars} / 40`;
+      
+      for (let i = 1; i <= 4; i++) {
+        const starElem = document.getElementById(`lvl${i}-stars`);
+        if (starElem) {
+          starElem.innerHTML = `<i class="fa-solid fa-star"></i> ${levelStars[i]}/10`;
+        }
+      }
+    }
+
+
+    /* ====================================================================
+       QUESTION RENDERING & GAMEPLAY
+       ==================================================================== */
+
+    let currentPromptText = "";
+
+    function renderCurrentQuestion() {
+      document.getElementById('feedback-banner').classList.add('hidden');
+      const viewport = document.getElementById('game-viewport');
+      viewport.innerHTML = '';
+
+      const totalQ = currentLevelQuestions.length;
+      const qNum = currentQuestionIndex + 1;
+      const progressPct = Math.round((qNum / totalQ) * 100);
+
+      document.getElementById('question-count-text').textContent = `Question ${qNum}/${totalQ}`;
+      document.getElementById('progress-percent-text').textContent = `${progressPct}%`;
+      document.getElementById('progress-bar-fill').style.width = `${progressPct}%`;
+
+      const qData = currentLevelQuestions[currentQuestionIndex];
+
+      if (currentLevel === 1) {
+        renderLevel1MCQ(qData, viewport);
+      } else if (currentLevel === 2) {
+        renderLevel2Matching(qData, viewport);
+      } else if (currentLevel === 3) {
+        if (qData.type === 'unscramble') renderLevel3Unscramble(qData, viewport);
+        else renderLevel1MCQ(qData, viewport); // share MCQ layout for traits & formal words
+      } else if (currentLevel === 4) {
+        renderLevel4Spelling(qData, viewport);
+      }
+    }
+
+    function speakCurrentPrompt() {
+      if (currentPromptText) speakText(currentPromptText);
+    }
+
+    // LEVEL 1: MCQ Render
+    function renderLevel1MCQ(qData, container) {
+      currentPromptText = qData.question || qData.title || qData.prompt;
+
+      const html = `
+        <div class="space-y-6 text-center">
+          <div class="bg-purple-50 p-6 rounded-3xl border-2 border-purple-200 shadow-inner">
+            <span class="text-xs font-black uppercase tracking-wider text-purple-600 bg-purple-200 px-3 py-1 rounded-full mb-3 inline-block">
+              ${qData.hint ? "Question" : "Word Challenge"}
+            </span>
+            <h2 class="text-xl sm:text-2xl font-black text-purple-900 leading-snug">
+              ${currentPromptText}
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            ${qData.options.map((opt, idx) => `
+              <button onclick="checkMCQAnswer(${idx}, ${qData.answer})" class="btn-3d bg-white hover:bg-pink-50 border-4 border-purple-200 hover:border-pink-400 text-purple-900 font-bold p-4 rounded-2xl text-base sm:text-lg text-left flex items-center justify-between group transition">
+                <span>${opt}</span>
+                <i class="fa-solid fa-circle-check text-purple-300 group-hover:text-pink-500 transition"></i>
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+      container.innerHTML = html;
+      speakCurrentPrompt();
+    }
+
+    function checkMCQAnswer(selectedIdx, correctIdx) {
+      if (selectedIdx === correctIdx) {
+        handleCorrectAnswer("Great Job! 🎉", "You selected the correct answer!");
+      } else {
+        handleWrongAnswer("Oops! Try again 💔", "That was not quite right.");
+      }
+    }
+
+
+    // LEVEL 2: Visual Card Match Render
+    function renderLevel2Matching(qData, container) {
+      currentPromptText = `Match the picture for: ${qData.sentence}`;
+
+      const html = `
+        <div class="space-y-6 text-center">
+          <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-3xl border-2 border-pink-200">
+            <div class="text-6xl mb-3 animate-bounce">${qData.emoji}</div>
+            <h2 class="text-xl sm:text-2xl font-black text-purple-900">
+              "${qData.sentence}"
+            </h2>
+            <p class="text-xs text-slate-500 mt-1">Which option matches this card?</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            ${qData.options.map((opt) => `
+              <button onclick="checkMatchingAnswer('${opt.replace(/'/g, "\\'")}', '${qData.sentence.replace(/'/g, "\\'")}')" class="btn-3d bg-white hover:bg-purple-50 border-4 border-purple-200 hover:border-purple-400 text-purple-900 font-bold p-4 rounded-2xl text-left text-base sm:text-lg flex items-center gap-3">
+                <span>${opt}</span>
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+      container.innerHTML = html;
+      speakText(qData.sentence);
+    }
+
+    function checkMatchingAnswer(selectedText, correctSentence) {
+      if (selectedText.includes(correctSentence)) {
+        handleCorrectAnswer("Awesome Reading! 📖", "You matched the sentence with the card!");
+      } else {
+        handleWrongAnswer("Not this one! 💭", "Look closely at the card picture!");
+      }
+    }
+
+
+    // LEVEL 3: Sentence Unscramble Render
+    let currentBuiltSentence = [];
+
+    function renderLevel3Unscramble(qData, container) {
+      currentPromptText = "Unscramble the sentence: It is a terrible game.";
+      currentBuiltSentence = [];
+
+      // Shuffle word tiles
+      const shuffledWords = [...qData.words].sort(() => 0.5 - Math.random());
+
+      const html = `
+        <div class="space-y-6 text-center">
+          <h2 class="text-xl sm:text-2xl font-black text-purple-900">
+            🧩 ${qData.title}
+          </h2>
+          <p class="text-xs text-slate-500">Tap the word tiles in the correct order:</p>
+
+          <!-- Drop Box / Constructed Sentence -->
+          <div id="unscramble-drop-zone" class="min-h-[70px] bg-purple-50 border-4 border-dashed border-purple-300 rounded-2xl p-3 flex flex-wrap items-center justify-center gap-2">
+            <span class="text-slate-400 text-sm font-semibold italic placeholder-text">Tap word blocks below...</span>
+          </div>
+
+          <!-- Word Tiles Pool -->
+          <div id="unscramble-pool" class="flex flex-wrap justify-center gap-3 py-2">
+            ${shuffledWords.map((word, idx) => `
+              <button id="tile-${idx}" onclick="tapWordTile('${word}', 'tile-${idx}')" class="btn-3d btn-purple text-white font-black text-lg px-5 py-2.5 rounded-xl">
+                ${word}
+              </button>
+            `).join('')}
+          </div>
+
+          <!-- Actions -->
+          <div class="flex justify-center gap-3 pt-2">
+            <button onclick="resetUnscramble()" class="px-4 py-2 bg-slate-200 text-slate-700 font-bold text-sm rounded-xl hover:bg-slate-300">
+              <i class="fa-solid fa-rotate-left"></i> Reset
+            </button>
+            <button onclick="checkUnscramble('${qData.correctSentence}')" class="btn-3d btn-pink text-white font-bold px-6 py-2 rounded-xl">
+              Check Sentence
+            </button>
+          </div>
+        </div>
+      `;
+      container.innerHTML = html;
+      speakText("It is a terrible game.");
+    }
+
+    function tapWordTile(word, tileId) {
+      const tileBtn = document.getElementById(tileId);
+      if (!tileBtn || tileBtn.disabled) return;
+
+      tileBtn.disabled = true;
+      tileBtn.classList.add('opacity-40', 'scale-95');
+
+      currentBuiltSentence.push({ word, tileId });
+      updateUnscrambleDropZone();
+      playSoundEffect('star');
+    }
+
+    function updateUnscrambleDropZone() {
+      const dropZone = document.getElementById('unscramble-drop-zone');
+      if (currentBuiltSentence.length === 0) {
+        dropZone.innerHTML = `<span class="text-slate-400 text-sm font-semibold italic placeholder-text">Tap word blocks below...</span>`;
+        return;
+      }
+
+      dropZone.innerHTML = currentBuiltSentence.map((item, idx) => `
+        <span onclick="removeWordTile(${idx})" class="bg-pink-500 text-white font-black text-lg px-4 py-2 rounded-xl shadow cursor-pointer hover:bg-pink-600 transition">
+          ${item.word}
+        </span>
+      `).join('');
+    }
+
+    function removeWordTile(indexInSentence) {
+      const removed = currentBuiltSentence.splice(indexInSentence, 1)[0];
+      const tileBtn = document.getElementById(removed.tileId);
+      if (tileBtn) {
+        tileBtn.disabled = false;
+        tileBtn.classList.remove('opacity-40', 'scale-95');
+      }
+      updateUnscrambleDropZone();
+    }
+
+    function resetUnscramble() {
+      currentBuiltSentence = [];
+      const poolBtns = document.querySelectorAll('#unscramble-pool button');
+      poolBtns.forEach(btn => {
+        btn.disabled = false;
+        btn.classList.remove('opacity-40', 'scale-95');
+      });
+      updateUnscrambleDropZone();
+    }
+
+    function checkUnscramble(correctSentence) {
+      const builtStr = currentBuiltSentence.map(i => i.word).join(' ');
+      if (builtStr === correctSentence) {
+        handleCorrectAnswer("Perfect Sentence! 🎯", `"${correctSentence}"`);
+      } else {
+        handleWrongAnswer("Not Quite! 🧩", "Try arranging the words in a different order!");
+      }
+    }
+
+
+    // LEVEL 4: Spelling Bee Render
+    function renderLevel4Spelling(qData, container) {
+      currentPromptText = `Fill in the missing letter for: ${qData.fullWord}`;
+
+      const html = `
+        <div class="space-y-6 text-center">
+          <div class="bg-teal-50 p-6 rounded-3xl border-2 border-teal-200">
+            <span class="text-xs font-black uppercase tracking-wider text-teal-700 bg-teal-200 px-3 py-1 rounded-full mb-2 inline-block">
+              Spelling Bee 🐝
+            </span>
+            <div class="text-3xl sm:text-4xl font-black text-purple-900 tracking-wider my-3">
+              ${qData.wordWithBlank.replace('_', '<span class="text-pink-500 underline decoration-4 decoration-pink-400">_</span>')}
+            </div>
+            <p class="text-sm font-bold text-slate-600">${qData.hint}</p>
+          </div>
+
+          <p class="text-xs text-slate-500 font-bold uppercase tracking-wider">Choose the correct missing letter:</p>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            ${qData.options.map((opt) => `
+              <button onclick="checkSpelling('${opt}', '${qData.missingLetter}')" class="btn-3d btn-teal text-white font-black text-2xl py-4 rounded-2xl">
+                ${opt}
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+      container.innerHTML = html;
+      speakText(qData.fullWord);
+    }
+
+    function checkSpelling(selected, missingLetter) {
+      if (selected === missingLetter) {
+        handleCorrectAnswer("Super Spelling! 🐝", "You completed the word correctly!");
+      } else {
+        handleWrongAnswer("Try Again! ✏️", "Choose the correct missing letter!");
+      }
+    }
+
+
+    /* ====================================================================
+       FEEDBACK & SCORING LOGIC
+       ==================================================================== */
+
+    function handleCorrectAnswer(title, subtitle) {
+      playSoundEffect('correct');
+      score += 10;
+      levelStars[currentLevel] = Math.min(10, levelStars[currentLevel] + 2);
+
+      // Trigger mini confetti
+      confetti({
+        particleCount: 40,
+        spread: 60,
+        origin: { y: 0.6 }
+      });
+
+      showFeedback(true, title, subtitle);
+      updateStatsUI();
+    }
+
+    function handleWrongAnswer(title, subtitle) {
+      playSoundEffect('wrong');
+      lives = Math.max(0, lives - 1);
+      updateStatsUI();
+
+      if (lives <= 0) {
+        showFeedback(false, "Out of Hearts! 💔", "Don't worry, you can try this level again!");
+      } else {
+        showFeedback(false, title, subtitle);
+      }
+    }
+
+    function showFeedback(isCorrect, title, subtitle) {
+      const banner = document.getElementById('feedback-banner');
+      const icon = document.getElementById('feedback-icon');
+      const titleElem = document.getElementById('feedback-title');
+      const subElem = document.getElementById('feedback-subtitle');
+      const nextBtn = document.getElementById('feedback-next-btn');
+
+      banner.classList.remove('hidden');
+      if (isCorrect) {
+        icon.textContent = "🌟";
+        titleElem.textContent = title;
+        titleElem.className = "text-2xl font-black text-emerald-600 mb-2";
+        subElem.textContent = subtitle;
+        nextBtn.className = "btn-3d btn-pink text-white font-black px-8 py-3 rounded-2xl flex items-center gap-2";
+      } else {
+        icon.textContent = lives <= 0 ? "💔" : "💡";
+        titleElem.textContent = title;
+        titleElem.className = "text-2xl font-black text-rose-600 mb-2";
+        subElem.textContent = subtitle;
+        nextBtn.className = "btn-3d btn-purple text-white font-black px-8 py-3 rounded-2xl flex items-center gap-2";
+      }
+    }
+
+    function nextQuestion() {
+      document.getElementById('feedback-banner').classList.add('hidden');
+
+      if (lives <= 0) {
+        goToHome();
+        return;
+      }
+
+      currentQuestionIndex++;
+      if (currentQuestionIndex >= currentLevelQuestions.length) {
+        // Level Complete!
+        confetti({
+          particleCount: 100,
+          spread: 80,
+          origin: { y: 0.5 }
+        });
+        playSoundEffect('correct');
+        alert(`🎉 Woohoo! Level ${currentLevel} Complete! You earned Stars!`);
+        goToHome();
+      } else {
+        renderCurrentQuestion();
+      }
+    }
+
+
+    /* ====================================================================
+       CERTIFICATE MODAL
+       ==================================================================== */
+
+    function showCertificateModal() {
+      document.getElementById('cert-student-name').textContent = studentName;
+      const totalStars = Object.values(levelStars).reduce((a, b) => a + b, 0);
+      document.getElementById('cert-stars').innerHTML = `<i class="fa-solid fa-star"></i> ${totalStars}`;
+      
+      document.getElementById('certificate-modal').classList.remove('hidden');
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { y: 0.5 }
+      });
+    }
+
+    function closeCertificateModal() {
+      document.getElementById('certificate-modal').classList.add('hidden');
+    }
+
+    // Initialize home setup on window load
+    window.onload = function() {
+      console.log("Top Goal 1 Web Application Loaded Successfully.");
+    };
+  </script>
+</body>
+</html>
